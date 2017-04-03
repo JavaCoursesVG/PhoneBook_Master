@@ -13,8 +13,8 @@ public class PhoneBook implements ShellDependent {
     private List<Record> recordList = new ArrayList<>();
 
     @Command
-    public void create(String name, String email, String... phones) {
-        Record r = new Record();
+    public void createPerone(String name, String email, String... phones) {
+        Person r = new Peron();
         r.setName(name);
         r.setEmail(email);
         r.addPhones(phones);
@@ -54,11 +54,20 @@ public class PhoneBook implements ShellDependent {
         List<Record> result = new ArrayList<>();
         for (Record r : recordList) {
             String name = r.getName().toLowerCase();
-            if (name.contains(str)) {
-                result.add(r);
+            String email = r.getEmail().toLowerCase();
+            if (name instanceof Person && name.contains(str) || email.concat(str)) {
+                Person p = (Person) name;
+                result.add(p);
+            } else {
+                for (String p : r.getPhones()) {
+                    p = p.toLowerCase();
+                    if (p.contains(str)) {
+                        result.add(r);
+                        break;
+                    }
+                }
             }
         }
-        
         return result;
     }
 
