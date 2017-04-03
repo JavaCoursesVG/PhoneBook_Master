@@ -15,8 +15,8 @@ public class Person extends PhoneBook {
     private String name;
     private String email;
     private final List<String> phones = new ArrayList<>();
-
-    public () {
+// test
+    public Person() {
         count++;
         id = count;
     }
